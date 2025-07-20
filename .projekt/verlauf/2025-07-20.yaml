@@ -1,0 +1,27 @@
+datum: 2025-07-20
+art: entwurf + erkenntnisse
+
+zusammenfassung:
+  - Captcha-Erzeugung mit `Kaptcha` in Spring Boot ist integriert, aber noch ohne Tests
+  - Die ursprüngliche Verwendung von `HttpSession` war aus einem GPT-Vorschlag übernommen, wird aber nun kritisch hinterfragt
+  - Alternativen zur Sitzungsspeicherung (z. B. HMAC-Token im HTML) werden bevorzugt
+  - Ziel ist ein Formular, das ohne JavaScript funktioniert
+  - Vollständig statische HTML-Seiten mit fixem Captcha-Token sind unsicher → keine Option
+  - Stattdessen: HTML-Formular mit serverseitig eingebettetem Captcha + verifizierbarem Token
+  - Statische Captcha-Listen bleiben als mögliche Erweiterung denkbar (z. B. für Botcheck-Pool), aber werden aktuell nicht verwendet
+  - AssertJ wurde als Testframework ergänzt; bestehende Tests bleiben kompatibel
+  - Neues zentrales Meta-Repo `lebenslauf-projekt` erstellt
+  - Submodule `.frontend` und `.backend` hinzugefügt (bestehende Repos)
+  - Projektplan und Tagesverlauf als `.projekt/`-Struktur aufgenommen
+  - Submodules bleiben bearbeitbar; Push im Meta-Repo referenziert neuen Commit-Stand
+
+
+entscheidungen:
+  - Kein JavaScript im Kontaktformular erforderlich
+  - Keine Verwendung von `HttpSession` zur Token-Speicherung
+  - Spring Boot bleibt zuständig für Captcha-Erzeugung und Verifikation
+  - Kontaktseite wird vollständig SSR-basiert gerendert
+  - Projektstruktur bleibt in einer einzigen YAML-Datei (`projekt-plan.yaml`)
+  - Meta-Repo verwaltet Planung und Verweise, kein Monorepo
+
+

@@ -1,0 +1,48 @@
+projekt: lebenslauf-vorlage
+stand: 2025-07-18
+
+kontext:
+  frontend: next.js (SSG + SSR)
+  backend: spring boot
+  ziel: Persönliche Lebenslaufseite mit optionaler token-geschützter Vollfassung
+
+fortschritt:
+  - [x] SSR-Token-Konzept formuliert
+  - [x] Veröffentlichungsschutz spezifiziert
+  - [x] BotcheckService begonnen
+  - [x] Botcheck-Test mit Jsoup stabilisiert
+  - [ ] SSR-Ausgabe mit Kontaktformular-Platzhalter generieren
+  - [ ] Token-Erzeugung per GitHub Action als YAML-Datei
+  - [ ] Netlify CI/CD-Trigger mit `git push`
+  - [ ] Kontaktformular vollständig serverseitig verifizieren
+  - [ ] Tests für Captcha-Integration schreiben
+  - [x] Meta-Repo erstellt mit Submodulen `.frontend` und `.backend`
+  - [x] Projektplan und Verlauf als YAML-Dateien eingeführt
+
+kontaktformular:
+  ziel:
+    - SSR-Seite `/kontakt` ohne JavaScript-Anforderungen
+    - Schutz gegen Bots ohne externe Dienste
+    - HTML-Formular mit serverseitig gerendertem Captcha
+  umsetzung:
+    - Captcha-HTML wird per Spring Boot (BotcheckService) eingebettet
+    - HTML enthält: Bild + Eingabefeld + signierten Token (hidden)
+    - Kein JavaScript benötigt (auch nicht zur Captcha-Auswahl)
+    - Tests mit Jsoup und Fixture-HTML
+  verifikation:
+    - Keine HttpSession – Token-Verifikation via signierter Wert
+    - Alternativ später: In-Memory Botcheck-Pool oder persistente Liste
+  sicherheit:
+    - Einmalverwendbare Token, Gültigkeit begrenzt (optional HMAC)
+    - Fallback bei Fehler: Formular mit neuem Captcha
+  status:
+    - HTML-Einbettung funktioniert
+    - Token-System in Planung
+    - Tests fehlen noch
+
+offene_fragen:
+  - Token-Ablaufzeit vs. Aktualisierungsfrequenz?
+  - Spring Boot: Session vs. tokenbasiert?
+  - Hosting-Modell für gemischte Architektur (Next.js + Spring)
+  - Integrierte Botcheck-Verwaltung oder einfache Variante beibehalten?
+
