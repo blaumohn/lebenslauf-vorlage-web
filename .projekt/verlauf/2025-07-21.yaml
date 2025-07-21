@@ -1,0 +1,27 @@
+zeitpunkt: "2025-07-21T20:00:00+02:00"
+betreff: Kontaktformular mit CAPTCHA, Tokenprüfung und Thymeleaf
+fortschritt:
+  - Bestehender Botcheck-Service entfernt
+  - Neuer `CaptchaTokenService` implementiert
+    - erzeugt base64-Captcha-Bild + signiertes Token
+    - validiert Token + Nutzerantwort serverseitig (zeitlich begrenzt)
+  - `CaptchaConfig` liest Konfiguration aus `kaptcha.properties`
+  - Neues Formular-Rendering mit Thymeleaf (`kontakt.html`)
+  - Controller-Umstellung von JSON zu klassischem HTML (`@Controller`)
+  - Fehleranzeige und Weiterleitung bei ungültigem CAPTCHA
+  - Unit-Tests für:
+    - Captcha-Erzeugung (`CaptchaConfigTest`)
+    - Tokenprüfung (`CaptchaTokenServiceTest`)
+  - Integrationstest mit Mocked CaptchaService (`KontaktControllerTest`)
+  - Hilfsklasse `TestCaptchas` eingeführt
+  - `build.gradle.kts`: `thymeleaf`-Starter + Testkonfiguration erweitert
+entscheidungen:
+  - Kein REST-Endpunkt für CAPTCHA nötig (HTML-seitig eingebettet)
+  - Sitzungslos dank tokenisiertem CAPTCHA-Verfahren
+naechste_schritte:
+  - Erweiterung des Projektplans um das Feature `view/<token>`:
+    - tokenisierte URLs zur Darstellung des vollständigen Lebenslaufs
+    - Aufbau via GitHub Actions / serverseitiger Generator
+  - Routingstruktur für Subdomain (z. B. `formular.meinlebenslauf.com`)
+  - Versand der Formulardaten per E-Mail (SMTP / SendGrid)
+  - Captcha-Ratenbegrenzung (für Abuse-Schutz)
