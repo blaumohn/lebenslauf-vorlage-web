@@ -1,5 +1,5 @@
 projekt: lebenslauf-vorlage
-stand: 2025-07-18
+stand: 2025-07-23
 
 kontext:
   frontend: next.js (SSG + SSR)
@@ -10,8 +10,9 @@ fortschritt:
   - [x] SSR-Token-Konzept formuliert
   - [x] Veröffentlichungsschutz spezifiziert
   - [x] BotcheckService begonnen
-  - [x] Botcheck-Test mit Jsoup stabilisiert
-  - [ ] SSR-Ausgabe mit Kontaktformular-Platzhalter generieren
+  - [x] CaptchaToken modularisiert & getestet
+  - [x] Codierung (HMAC + Base64) ausgelagert & getestet
+  - [x] Integrationstest für LebenslaufController repariert
   - [ ] Token-Erzeugung per GitHub Action als YAML-Datei
   - [ ] Netlify CI/CD-Trigger mit `git push`
   - [ ] Kontaktformular vollständig serverseitig verifizieren
@@ -31,18 +32,18 @@ kontaktformular:
     - Tests mit Jsoup und Fixture-HTML
   verifikation:
     - Keine HttpSession – Token-Verifikation via signierter Wert
+    - CaptchaToken wird per HMAC geprüft und Ablaufzeit validiert
     - Alternativ später: In-Memory Botcheck-Pool oder persistente Liste
   sicherheit:
     - Einmalverwendbare Token, Gültigkeit begrenzt (optional HMAC)
     - Fallback bei Fehler: Formular mit neuem Captcha
+    - Codierung geheimnisvoll und aus Properties ladbar
   status:
-    - HTML-Einbettung funktioniert
-    - Token-System in Planung
-    - Tests fehlen noch
+    - CaptchaTokenService aktiv im Einsatz
+    - Codierung getestet
+    - Integrationstest überarbeitet (WebMvcTest statt SpringBootTest)
 
 offene_fragen:
   - Token-Ablaufzeit vs. Aktualisierungsfrequenz?
-  - Spring Boot: Session vs. tokenbasiert?
   - Hosting-Modell für gemischte Architektur (Next.js + Spring)
-  - Integrierte Botcheck-Verwaltung oder einfache Variante beibehalten?
 

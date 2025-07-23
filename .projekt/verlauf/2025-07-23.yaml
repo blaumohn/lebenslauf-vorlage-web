@@ -1,0 +1,12 @@
+datum: 2025-07-23
+titel: Captcha-Modularisierung & Test-Fix für Lebenslauf
+aenderungen:
+  - CaptchaToken extrahiert als eigene Klasse zur Validierung/Serialisierung
+  - Codierung (HMAC + Base64) als Komponente ausgelagert und getestet
+  - CaptchaTokenService modularisiert, Teststruktur überarbeitet
+  - KontaktController angepasst auf neue Captcha-Struktur
+  - CodierungTest hinzugefügt für deterministische HMAC und Base64-Ausgabe
+  - LebenslaufControllerTest repariert:
+    - ersetzt @SpringBootTest durch @WebMvcTest + @Import(TestTokenServiceConfig)
+    - Zeichenkodierungsfehler in content-Assertion behoben
+  - LebenslaufControllerTest funktioniert nun zuverlässig und unabhängig vom vollen ApplicationContext
