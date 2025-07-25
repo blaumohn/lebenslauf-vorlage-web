@@ -1,0 +1,49 @@
+captcha-h2-integration:
+  ziel: "Temporäre Captcha-Tokens sicher speichern – auch bei Serverneustart"
+  technik: "Spring Boot + H2 (file-basiert) + feature-orientierte Struktur"
+
+  schritte:
+    - schritt: 1
+      titel: "H2-Datenbank einsetzen und testen"
+      status: erledigt ✅
+      details:
+        - Verwende H2 als Datei-Datenbank: `jdbc:h2:file:./data/captcha-db`
+        - Aktiviere H2-Konsole im Dev-Profil
+        - Stelle sicher, dass `.mv.db`-Dateien erstellt werden
+        - Prüfe Zugriff über Konsole: http://localhost:8081/h2-console
+        - `.gitignore` ergänzt für `*.mv.db`, `*.trace.db`
+
+    - schritt: 2
+      titel: "Dummy-Modell mit Repository und CommandLineRunner"
+      status: erledigt ✅
+      details:
+        - `Dummy.kt` erstellt unter `kontakt/model/`
+        - `DummyRepository.kt` erstellt
+        - `CommandLineRunner` mit `@Profile("dev")` hinzugefügt
+        - Funktion mit `spring.jpa.hibernate.ddl-auto=update` getestet
+        - Commit mit `feat(kontakt): …` erfolgreich durchgeführt
+
+    - schritt: 3
+      titel: "Dummy durch CaptchaEntry ersetzen"
+      status: geplant
+      details:
+        - Neues Modell `CaptchaEntry`
+        - Repository + Speicherung
+        - Übergang zum eigentlichen Anwendungsfall
+
+    - schritt: 4
+      titel: "Captcha-Token-Prüfung integrieren"
+      status: geplant
+      details:
+        - Signierte Token nur lesbar im Server
+        - Prüfung gegen gespeicherten Eintrag
+        - Token nach Verwendung löschen
+
+    - schritt: 5
+      titel: "Speicherverwaltung und Cleanup"
+      status: geplant
+      details:
+        - Ablaufzeit prüfen (z. B. 5 Minuten)
+        - Begrenzung der DB-Größe
+        - `@Scheduled`-Task zur Löschung alter Tokens
+

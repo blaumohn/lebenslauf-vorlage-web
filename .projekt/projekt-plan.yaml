@@ -1,5 +1,5 @@
 projekt: lebenslauf-vorlage
-stand: 2025-07-23
+stand: 2025-07-25
 
 kontext:
   frontend: next.js (SSG + SSR)
@@ -19,6 +19,11 @@ fortschritt:
   - [ ] Tests für Captcha-Integration schreiben
   - [x] Meta-Repo erstellt mit Submodulen `.frontend` und `.backend`
   - [x] Projektplan und Verlauf als YAML-Dateien eingeführt
+  - [x] H2-Datenbank für Captcha-Persistenz im `dev`-Profil integriert
+  - [x] Dummy-Modell + Repository + CommandLineRunner erfolgreich getestet
+  - [x] `.gitignore` um H2-Dateien ergänzt (`*.mv.db`, `*.trace.db`)
+  - [x] Projektstruktur feature-orientiert angepasst (`kontakt/model/…`)
+  - [x] Commit-Historie aufgeräumt mit Conventional Commits
 
 kontaktformular:
   ziel:
@@ -42,8 +47,12 @@ kontaktformular:
     - CaptchaTokenService aktiv im Einsatz
     - Codierung getestet
     - Integrationstest überarbeitet (WebMvcTest statt SpringBootTest)
+    - H2-basierte Speicherung vorbereitet für produktionsähnlichen Ablauf
+    - Token werden bei Neustart erkannt (file-basiert)
 
 offene_fragen:
   - Token-Ablaufzeit vs. Aktualisierungsfrequenz?
   - Hosting-Modell für gemischte Architektur (Next.js + Spring)
+  - Cleanup-Strategie für gespeicherte Captcha-Einträge?
+  - Wo Fehler-Rückmeldungen für abgelaufene Tokens am besten platziert?
 
